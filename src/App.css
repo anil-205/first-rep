@@ -1,32 +1,51 @@
-.App {
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 1px solid blue; 
+  margin: 200px 300px;
+  padding: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.welcome {
+  background-color: aqua;
+  border: 2px solid; 
+  width: 50%;
   text-align: center;
 }
 
-.main {
-  border: 1px solid black;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+.details {
+  margin-left: 10px;
+  background-color: aqua;
+  border: 2px solid; 
+  width: 50%;
+  text-align: center;
 }
 
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
+.form-control {
+  display: flex;
+  margin-left: 10px;
+}
+
+.btn-submit {
+  background-color: lightseagreen;
+  margin-top: 10px;
+  float: right;
+  margin-right: 50px;
+}
+
+ul {
+  list-style-type: none;
   justify-content: center;
 }
 
-.first-nth li:nth-child(3n+0) {
-  background: blueviolet;
+li {
+  border: 2px solid;
+  border-radius: 4px;
+  margin: 1px 7px;
+  background-color: #fff;
+  box-shadow: 5px 5px #888888;
+ 
 }
 
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

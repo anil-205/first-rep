@@ -1,64 +1,73 @@
 import React from 'react';
 import logo from './logo.svg';
+import { connect } from 'react-redux';
 import './App.css';
 
-class Welcome extends React.Component {
+class ATM extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: 'react',
-      password: '',
-      success: '',
-      init: 1
+      amount: '',
+      error: false,
+      noOfNotes: []
     }
   }
 
-  handleChange = (e) => {
+  handleOnChange = (e) => {
     var {id, value} = e.target;
-    this.setState({[id] : value})
+    this.setState({[id]: parseInt(value), error: false})
   }
 
-  onSubmit = (e) => {
-    let success = this.state.userName == 'react' ? 1 : 0
-    this.setState({success, init: 0})
-    console.log('submitted')
+  handleSubmit = (e) => {
+    var amount = this.state.amount;
+    let notes = [100, 50, 20, 10, 5, 2, 1];
+    let noOfNotes = [];
+    notes.map((item, index) => {
+      if(amount > 0) {
+        let value = parseInt(amount/item);
+        amount = amount - value * item;
+        noOfNotes.push(value)
+      }
+    })
+    this.setState({noOfNotes})
   }
 
-  backToHome = () => {
-    let state = {
-      userName: 'react',
-      password: '',
-      success: '',
-      init: 1
-    }
-    this.setState(state)
-  }
   render() {
-    console.log('state', this.state)
     return (
-      <div className="App">
-        <div className="main flex-container">
-          <h1>Welcome To Sapient</h1>
-          {this.state.init ? 
+      <div className="flex-container">
+        <div className="welcome">
+          <h1>Welcome To ATM</h1>
+          Enter Money:
+          <input type="number" className="form-control" id="amount" value={this.state.amount} onChange={this.handleOnChange} required></input>
           
-            <div className="login">
-              <label>User Name:</label>
-              <input type="text" id="userName" value={this.state.userName} onChange={this.handleChange}></input><br />
-              <label>Password:</label>
-              <input type="password" id="password" value={this.state.password} onChange={this.handleChange}></input><br />
-              <button type="submit" onClick={this.onSubmit}>Submit</button>
-            </div>
-           :
-            <div>
-              <label className={this.state.success ? 'success' : 'error'}>{this.state.success ? 'Login successfully' : 'credentials are mismatch'}</label>
-              <button className='btn-submit' type="submit" onClick={this.backToHome}>Home</button>
-            </div> 
-          
-          }
+          <br />
+          <button type="submit" className="btn-submit" onClick={this.handleSubmit}>Submit</button>
+        </div>
+        <div className="details">
+            <ul className="list">
+              <li className="list-item">{this.state.noOfNotes[0]} 100 notes</li>
+              <li className="list-item">{this.state.noOfNotes[1]} 50 notes</li>
+              <li className="list-item">{this.state.noOfNotes[2]} 20 notes</li>
+              <li className="list-item">{this.state.noOfNotes[3]} 10 notes</li>
+              <li className="list-item">{this.state.noOfNotes[4]} 5 notes</li>
+              <li className="list-item">{this.state.noOfNotes[5]} 2 notes</li>
+              <li className="list-item">{this.state.noOfNotes[6]} 1 notes</li>
+            </ul>
         </div>
       </div>
-    )
+    )}
+}
+
+const mapStateToProps = (state) => {
+  return {
+    
   }
 }
 
-export default Welcome;
+function mapDispatchToProps (dispatch) {
+  return {
+    
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ATM);
